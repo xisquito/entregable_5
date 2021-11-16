@@ -8,7 +8,7 @@ public class PlayerController : MonoBehaviour
     private float speed = 10f;
     private float verticalInput;
     private float turnSpeed = 20f;
-    private float zMax;
+    private float zMax = 450f;
     
 
 
@@ -27,23 +27,20 @@ public class PlayerController : MonoBehaviour
         //Movimiento constante hacia delante
         transform.Translate(Vector3.forward * Time.deltaTime * speed);
 
+        //Rotacion en el eje X
         verticalInput = Input.GetAxis("Vertical");
+        transform.Rotate(Vector3.right, turnSpeed * Time.deltaTime * verticalInput);
 
-        if (zMax >= 50)
+        //Si ZMax pasa de 450, en la consola saldra un mensaje de "The End"
+        if (transform.position.z >= zMax)
         {
-            Debug.Log($"THE END");
+            Debug.Log(message: "THE END");
+            Time.timeScale = 0;
         }
 
-        if (Input.GetKeyDown(KeyCode.W))
-        {
-            
-        }
 
-        if (Input.GetKeyDown(KeyCode.S))
-        {
 
-        }
-        
+
 
     }
 }
